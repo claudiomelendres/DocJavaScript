@@ -15,6 +15,8 @@ let puntosJugador = 0,
 // Referencias de HTML
 const btnPedir = document.querySelector("#btnPedir");
 const btnDetener = document.querySelector("#btnDetener");
+const btnNuevo = document.querySelector("#btnNuevo");
+
 
 const puntosHtml = document.querySelectorAll("small");
 const divCartasJugador = document.querySelector("#jugador-cartas");
@@ -22,6 +24,7 @@ const divCartasComputadora = document.querySelector("#computadora-cartas");
 
 // crea una baraja deck
 const crearDeck = () => {
+  deck=[];
   for (let i = 2; i <= 10; i++) {
     for (let tipo of tipos) {
       deck.push(i + tipo);
@@ -38,17 +41,6 @@ const crearDeck = () => {
 crearDeck();
 console.log(deck);
 
-// // pedir carta
-// const pedirCarta = () => {
-//   const indice = Math.floor(Math.random() * deck.length - 1);
-//   const carta = deck[indice];
-
-//   deck = deck.filter((c) => c != carta);
-
-//   //   console.log(carta);
-//   console.log(deck);
-//   return carta;
-// };
 
 const pedirCarta = () => {
   if (deck.length == 0) {
@@ -81,6 +73,21 @@ const turnoComputadora = (puntosMinimos) => {
       break;
     }
   } while (puntosComputadora < puntosMinimos && puntosMinimos < 21);
+ 
+
+  setTimeout(() => {
+    if( puntosComputadora === puntosMinimos ) {
+      alert('nadie Gana!!!')
+    }else if ( puntosMinimos>21 ) {
+      alert('Computadora Gana!!!')
+    } else if( puntosComputadora >21) {
+      alert('jugador Gana!!!')
+    } else {
+      alert('Compudatora Gana!!!')
+    }
+  }, 10);
+  // quien Gana
+
 };
 
 // console.log(valorCarta(pedirCarta()));
@@ -117,4 +124,23 @@ btnDetener.addEventListener("click", () => {
   btnPedir.disabled = true;
   btnDetener.disabled = true;
   turnoComputadora(puntosJugador);
+});
+
+btnNuevo.addEventListener("click", () => {
+  btnPedir.disabled = false;
+  btnDetener.disabled = false;
+
+  puntosComputadora = 0;
+  puntosJugador = 0;
+
+  puntosHtml[0].innerText = 0;
+  puntosHtml[1].innerText = 0;
+
+  divCartasJugador.innerHTML = ''
+  divCartasComputadora.innerHTML = ''
+
+
+  crearDeck();
+  console.log(deck);
+
 });

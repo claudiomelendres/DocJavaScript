@@ -1,4 +1,4 @@
-import { pedirCarta, valorCarta, crearCartaHTML } from "./";
+import { pedirCarta, valorCarta, crearCartaHTML } from ".";
 
 /**
  * turno de la computadora

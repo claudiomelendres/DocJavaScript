@@ -12,7 +12,10 @@ export const promiseComponent = (element) => {
   };
 
   const renderTwoHeroes = (hero1, hero2) => {
-    element.innerHTML = `${hero1.name},${hero2.name}`;
+    element.innerHTML = `
+      <h3>${hero1.name}</h3>
+      <h3>${hero2.name}</h3>
+      `;
   };
 
   const renderError = (err) => {
